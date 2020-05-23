@@ -9,7 +9,8 @@ export const Avatar = styled.Image`
 `;
 
 export const CalloutBox = styled.View`
-  width: 260px;
+  width: 270px;
+  padding: 10px;
 `;
 
 export const DevName = styled.Text`
