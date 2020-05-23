@@ -11,7 +11,7 @@ function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Find Host" component={Main} />
+        <Stack.Screen name="Devs" component={Main} />
         <Stack.Screen name="Profile" component={Profile} />
       </Stack.Navigator>
     </NavigationContainer>
