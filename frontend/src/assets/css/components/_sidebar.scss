@@ -7,7 +7,7 @@
   max-width: 30%;
   background-color: #ffffff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 30px 20px;
 
   &__title {
@@ -27,7 +27,7 @@
     }
 
     label {
-      color: #ACACAC;
+      color: #acacac;
       font-size: 14px;
       font-weight: bold;
       display: block;
@@ -62,13 +62,13 @@
   border: 0;
   margin-top: 30px;
   background-color: #7d40e7;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   padding: 15px 20px;
   font-size: 16px;
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
-  transition: background-color .5s;
+  transition: background-color 0.5s;
 
   &:hover {
     background-color: #6931ca;
