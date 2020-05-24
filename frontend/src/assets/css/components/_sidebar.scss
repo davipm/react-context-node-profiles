@@ -41,6 +41,16 @@
       border: 0;
       border-bottom: 1px solid #eeeeee;
       outline: 0;
+
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      &[type=number] {
+        -moz-appearance: textfield;
+      }
     }
   }
 
@@ -66,6 +76,7 @@
   padding: 15px 20px;
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
   color: #ffffff;
   cursor: pointer;
   transition: background-color 0.5s;

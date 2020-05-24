@@ -5,27 +5,30 @@ function DevForm({ onSubmit }) {
   const [techs, setTechs] = useState("");
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
+  const options = {
+    timeout: 3000
+  }
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-
-        setLatitude(latitude);
-        setLongitude(longitude);
-      },
-      (positionError) => {
-        console.log(positionError);
-      },
-      {
-        timeout: 30000,
-      }
-    );
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
+    } else {
+      alert('You browser dont support geolocation');
+    }
   }, []);
+
+  function onSuccess(position) {
+    const { latitude, longitude } = position.coords;
+    setLatitude(latitude);
+    setLongitude(longitude);
+  }
+
+  function onError(error) {
+    console.warn(error.message);
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
-
     await onSubmit({
       github_username,
       techs,
@@ -35,7 +38,6 @@ function DevForm({ onSubmit }) {
 
     setGithubUsername("");
     setTechs("");
-
     setLongitude("");
     setLatitude("");
   }
