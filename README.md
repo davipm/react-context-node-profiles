@@ -12,6 +12,7 @@ Node.js instaled, and Expo.io
 * React Native
 * Node
 * RestAPI
+* Geolocation
 
 ## Authors
 
