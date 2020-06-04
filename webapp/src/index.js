@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import http from "http";
+import morgan from 'morgan';
+import path from 'path';
 import "colors";
 
 import devRoute from './routes/dev';
@@ -18,8 +20,19 @@ setupWebsocket(server);
 
 app.use(cors());
 app.use(express.json());
-app.use(devRoute);
-app.use(searchRoute);
+
+if (process.env.NODE_ENV === 'development') {
+  app.use(morgan('dev'));
+}
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('src/client/build'));
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
+  );
+}
+
+app.use([devRoute, searchRoute]);
 
 app.listen(process.env.PORT, () =>
   console.log(`Hello World running in port ${process.env.PORT}`.yellow.bold)
