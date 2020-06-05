@@ -1,31 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import usePosition from "../../hooks/usePosition";
 
 function DevForm({ onSubmit }) {
+  const { latitude, longitude, setPosition } = usePosition();
   const [github_username, setGithubUsername] = useState("");
   const [techs, setTechs] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
-  const options = {
-    timeout: 3000
-  }
-
-  useEffect(() => {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(onSuccess, onError, options);
-    } else {
-      alert('You browser dont support geolocation');
-    }
-  }, []);
-
-  function onSuccess(position) {
-    const { latitude, longitude } = position.coords;
-    setLatitude(latitude);
-    setLongitude(longitude);
-  }
-
-  function onError(error) {
-    console.warn(error.message);
-  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -38,8 +17,7 @@ function DevForm({ onSubmit }) {
 
     setGithubUsername("");
     setTechs("");
-    setLongitude("");
-    setLatitude("");
+    setPosition({});
   }
 
   return (
@@ -69,26 +47,26 @@ function DevForm({ onSubmit }) {
       </div>
 
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Latitude</label>
+        <label htmlFor="githubUsername">Latitude {latitude}</label>
         <input
           type="number"
           name="latitude"
           id="latitude"
           required
           value={latitude}
-          onChange={(event) => setLatitude(event.target.value)}
+          onChange={(event) => setPosition({ latitude: event.target.value })}
         />
       </div>
 
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Longitude</label>
+        <label htmlFor="githubUsername">Longitude {longitude}</label>
         <input
           type="number"
           name="longitude"
           id="longitude"
           required
           value={longitude}
-          onChange={(event) => setLongitude(event.target.value)}
+          onChange={(event) => setPosition({ longitude: event.target.value })}
         />
       </div>
 
