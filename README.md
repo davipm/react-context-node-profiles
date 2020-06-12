@@ -10,10 +10,12 @@ Node.js instaled, and Expo.io
 
 * React
 * React Native
+* SASS
+* Styled Components
 * Node
 * RestAPI
 * Geolocation
 
 ## Authors
 
-* **Davi Pereira** 
+* **Davi Pereira**
