@@ -1,17 +1,16 @@
 # Find Profiles
 
-Find profiles by tecnical Competence
+Find profiles by technical Competence
 
 ### Prerequisites
 
-Node.js instaled, and Expo.io
+Node.js installed, and Expo.io
 
 ## Built With
 
-* React
+* Vue.js
 * React Native
 * SASS
-* Styled Components
 * Node
 * RestAPI
 * Geolocation
