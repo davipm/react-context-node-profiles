@@ -33,13 +33,21 @@ export default {
 
   methods: {
     async loadDev() {
-      const response = await api.get("/dev");
-      this.devs = response.data;
+      try {
+        const response = await api.get("/dev");
+        this.devs = response.data;
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     async handleAddDev(data) {
-      const response = await api.post("/dev", data);
-      this.devs = [...this.devs, response.data];
+      try {
+        const response = await api.post("/dev", data);
+        this.devs = [...this.devs, response.data];
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 
