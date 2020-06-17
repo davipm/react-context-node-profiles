@@ -1,10 +1,10 @@
 # Find Profiles
 
-Find profiles by tecnical Competence
+Find profiles by technical Competence
 
 ### Prerequisites
 
-Node.js instaled, and Expo.io
+Node.js installed, and Expo.io
 
 ## Built With
 
@@ -15,6 +15,9 @@ Node.js instaled, and Expo.io
 * Node
 * RestAPI
 * Geolocation
+
+in the branch "vueclient"
+* Vue.js
 
 ## Authors
 
