@@ -39,7 +39,7 @@ export default {
 
     async handleAddDev(data) {
       const response = await api.post("/dev", data);
-      this.devs.push(response.data);
+      this.devs = [...this.devs, response.data];
     },
   },
 
