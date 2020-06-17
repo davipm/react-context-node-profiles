@@ -1,6 +1,6 @@
 import socketio from "socket.io-client";
 
-const socket = socketio("http://192.168.0.101:3333", {
+const socket = socketio("http://192.168.0.100:3333", {
   autoConnect: false,
 });
 
