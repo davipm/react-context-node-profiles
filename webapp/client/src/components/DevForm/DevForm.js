@@ -8,6 +8,7 @@ function DevForm({ onSubmit }) {
 
   async function handleSubmit(event) {
     event.preventDefault();
+
     await onSubmit({
       github_username,
       techs,
@@ -23,7 +24,7 @@ function DevForm({ onSubmit }) {
   return (
     <form onSubmit={handleSubmit} className="form">
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Usuário do Github</label>
+        <label htmlFor="github_username">Usuário do Github</label>
         <input
           type="text"
           name="github_username"
@@ -35,7 +36,7 @@ function DevForm({ onSubmit }) {
       </div>
 
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Tecnologias</label>
+        <label htmlFor="techs">Tecnologias</label>
         <input
           type="text"
           name="techs"
@@ -47,9 +48,9 @@ function DevForm({ onSubmit }) {
       </div>
 
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Latitude</label>
+        <label htmlFor="latitude">Latitude</label>
         <input
-          type="number"
+          type="text"
           name="latitude"
           id="latitude"
           required
@@ -59,9 +60,9 @@ function DevForm({ onSubmit }) {
       </div>
 
       <div className="form__input--block">
-        <label htmlFor="githubUsername">Longitude</label>
+        <label htmlFor="longitude">Longitude</label>
         <input
-          type="number"
+          type="text"
           name="longitude"
           id="longitude"
           required
