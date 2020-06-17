@@ -27,21 +27,25 @@ function Main({ navigation }) {
 
   useEffect(() => {
     async function loadInitialPosition() {
-      const { granted } = await requestPermissionsAsync();
+      try {
+        const { granted } = await requestPermissionsAsync();
 
-      if (granted) {
-        const { coords } = await getCurrentPositionAsync({
-          enableHighAccuracy: true,
-        });
+        if (granted) {
+          const { coords } = await getCurrentPositionAsync({
+            enableHighAccuracy: true,
+          });
 
-        const { latitude, longitude } = coords;
+          const { latitude, longitude } = coords;
 
-        setCurrentRegion({
-          latitude,
-          longitude,
-          latitudeDelta: 0.04,
-          longitudeDelta: 0.04,
-        });
+          setCurrentRegion({
+            latitude,
+            longitude,
+            latitudeDelta: 0.04,
+            longitudeDelta: 0.04,
+          });
+        }
+      } catch (error) {
+        console.log(error);
       }
     }
 
@@ -61,18 +65,23 @@ function Main({ navigation }) {
   }
 
   async function loadDevs() {
-    const { longitude, latitude } = currentRegion;
+    try {
+      const { longitude, latitude } = currentRegion;
 
-    const response = await api.get("/search", {
-      params: {
-        latitude,
-        longitude,
-        techs,
-      },
-    });
+      const response = await api.get("/search", {
+        params: {
+          latitude,
+          longitude,
+          techs,
+        },
+      });
 
-    setDevs(response.data.devs);
-    setupWebsocket();
+      setDevs(response.data.devs);
+
+      setupWebsocket();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   function handleRegionChanged(region) {

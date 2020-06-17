@@ -9,9 +9,13 @@ import { findConnections, sendMessage } from "../websocket";
  * @param response
  * @returns {Promise<any>}
  */
-export const index = async (request, response) => {
-  const devs = await Dev.find();
-  return response.json(devs);
+export const getDevs = async (request, response) => {
+  try {
+    const devs = await Dev.find();
+    return response.status(200).json(devs);
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 /**
@@ -20,36 +24,43 @@ export const index = async (request, response) => {
  * @param response
  * @returns {Promise<any>}
  */
-export const store = async (request, response) => {
-  const { github_username, techs, latitude, longitude } = request.body;
-  let dev = await Dev.findOne({ github_username });
+export const createDev = async (request, response) => {
+  try {
+    const { github_username, techs, latitude, longitude } = request.body;
 
-  if (!dev) {
-    const apiResponse = await axios.get(
-      `https://api.github.com/users/${github_username}`
-    );
-    const { name = login, avatar_url, bio } = apiResponse.data;
-    const techsArray = parseStringAsArray(techs);
-    const location = {
-      type: "Point",
-      coordinates: [longitude, latitude],
-    };
+    let dev = await Dev.findOne({ github_username });
 
-    dev = await Dev.create({
-      github_username,
-      name,
-      avatar_url,
-      bio,
-      techs: techsArray,
-      location,
-    })
+    if (!dev) {
+      const apiResponse = await axios.get(
+        `https://api.github.com/users/${github_username}`
+      );
 
-    const sendSocketMessageTo = findConnections(
-      { latitude, longitude },
-      techsArray
-    );
-    sendMessage(sendSocketMessageTo, "new-dev", dev);
+      const { name = login, avatar_url, bio } = apiResponse.data;
+      const techsArray = parseStringAsArray(techs);
+
+      const location = {
+        type: "Point",
+        coordinates: [longitude, latitude],
+      };
+
+      dev = await Dev.create({
+        github_username,
+        name,
+        avatar_url,
+        bio,
+        techs: techsArray,
+        location,
+      });
+
+      const sendSocketMessageTo = findConnections(
+        { latitude, longitude },
+        techsArray
+      );
+      sendMessage(sendSocketMessageTo, "new-dev", dev);
+    }
+
+    return response.json(dev);
+  } catch (error) {
+    return response.status(404).json({ message: "User not find" });
   }
-
-  return response.json(dev);
 };

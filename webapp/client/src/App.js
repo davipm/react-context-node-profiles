@@ -8,16 +8,24 @@ function App() {
 
   useEffect(() => {
     async function loadDev() {
-      const response = await api.get("/dev");
-      setDevs(response.data);
+      try {
+        const response = await api.get("/dev");
+        setDevs(response.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
 
     loadDev();
   }, []);
 
   async function handleAddDev(data) {
-    const response = await api.post("/dev", data);
-    setDevs([...devs, response.data]);
+    try {
+      const response = await api.post("/dev", data);
+      setDevs([...devs, response.data]);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
