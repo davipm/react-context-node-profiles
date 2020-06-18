@@ -16,7 +16,7 @@ Node.js installed, and Expo.io
 * RestAPI
 * Geolocation
 
-in the branch "vueclient"
+in the branch "vue client" has vuejs version of web client:
 * Vue.js
 
 ## Authors
