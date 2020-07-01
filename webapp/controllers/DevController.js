@@ -7,7 +7,7 @@ import { findConnections, sendMessage } from "../websocket";
  *
  * @param request
  * @param response
- * @returns {Promise<any>}
+ * @returns {Promise<this>}
  */
 export const getDevs = async (request, response) => {
   try {
@@ -22,7 +22,7 @@ export const getDevs = async (request, response) => {
  *
  * @param request
  * @param response
- * @returns {Promise<any>}
+ * @returns {Promise<this>}
  */
 export const createDev = async (request, response) => {
   try {
@@ -61,6 +61,21 @@ export const createDev = async (request, response) => {
 
     return response.json(dev);
   } catch (error) {
-    return response.status(404).json({ message: "User not find" });
+    return response.status(500).json({ message: 'Server Error' });
   }
 };
+
+/**
+ *
+ * @param request
+ * @param response
+ * @returns {Promise<this>}
+ */
+export const deleteDev = async (request, response) => {
+  try {
+    await Dev.findByIdAndDelete(request.params.id);
+    return response.status(200).json('Dev Deleted');
+  } catch (error) {
+    return response.status(500).json({ message: 'Server Error' });
+  }
+}
