@@ -28,6 +28,15 @@ function App() {
     }
   }
 
+  async function deleteDev(id) {
+    try {
+      await api.delete(`/dev/${id}`);
+      setDevs(devs.filter(dev => dev._id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <div id="app">
       <aside className="aside">
@@ -38,7 +47,7 @@ function App() {
       <main className="app__main">
         <ul className="main__list">
           {devs.map((dev) => (
-            <DevItem key={dev._id} dev={dev} />
+            <DevItem key={dev._id} dev={dev} deleteDev={deleteDev} />
           ))}
         </ul>
       </main>
