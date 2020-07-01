@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import usePosition from "../../hooks/usePosition";
 
 function DevForm({ onSubmit }) {
-  const { latitude, longitude, setPosition } = usePosition();
+  const { latitude, longitude, onChange, clearPosition } = usePosition();
   const [github_username, setGithubUsername] = useState("");
   const [techs, setTechs] = useState("");
 
@@ -18,7 +18,7 @@ function DevForm({ onSubmit }) {
 
     setGithubUsername("");
     setTechs("");
-    setPosition({});
+    clearPosition();
   }
 
   return (
@@ -55,7 +55,7 @@ function DevForm({ onSubmit }) {
           id="latitude"
           required
           value={latitude}
-          onChange={(event) => setPosition({ latitude: event.target.value })}
+          onChange={onChange}
         />
       </div>
 
@@ -67,7 +67,7 @@ function DevForm({ onSubmit }) {
           id="longitude"
           required
           value={longitude}
-          onChange={(event) => setPosition({ longitude: event.target.value })}
+          onChange={onChange}
         />
       </div>
 

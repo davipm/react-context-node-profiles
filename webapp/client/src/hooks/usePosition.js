@@ -1,7 +1,12 @@
-import { useState, useEffect } from "react";
+import { useReducer, useEffect } from "react";
+
+const initial = {
+  latitude: '',
+  longitude: ''
+};
 
 function usePosition() {
-  const [position, setPosition] = useState({});
+  const [position, setPosition] = useReducer((state, newState) => ({...state, ...newState}), initial);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -22,7 +27,16 @@ function usePosition() {
     console.warn(error.message);
   }
 
-  return { ...position, setPosition };
+  function onChange(event) {
+    const { name, value } = event.target;
+    setPosition({ [name]: value });
+  }
+
+  function clearPosition() {
+    setPosition(initial);
+  }
+
+  return { ...position, onChange, clearPosition };
 }
 
 export default usePosition;
