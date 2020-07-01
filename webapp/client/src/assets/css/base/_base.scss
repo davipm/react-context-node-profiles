@@ -3,6 +3,18 @@
 // -----------------------------------------------------------------------------
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 
+:root {
+  --main-bg-color: #e5e6f0;
+  --white-color: #ffffff;
+  --main-text-color: #333333;
+  --box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
+  --label-color: #acacac;
+  --input-color: #666666;
+  --input-border-color: #eeeeee;
+  --button-bg-color: #7d40e7;
+  --button-bg-color-hover: #6931ca;
+}
+
 *,
 *::before,
 *::after {
@@ -23,6 +35,7 @@ body {
   font-size: 18px;
   font-family: Roboto, sans-serif;
   line-height: 1.5;
-  background-color: #e5e6f0;
+  background-color: var(--main-bg-color);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
