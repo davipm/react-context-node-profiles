@@ -1,7 +1,11 @@
 import React from "react";
 import style from "./devItem.module.scss";
 
-function DevItem({ dev, deleteDev }) {
+import { useGlobalState } from "../../store/GlobalState";
+
+function DevItem({ dev }) {
+  const { deleteDev } = useGlobalState();
+
   return (
     <li className={style.devItem}>
       <span

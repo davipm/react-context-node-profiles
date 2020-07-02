@@ -1,7 +1,11 @@
 import React, { useState } from "react";
-import usePosition from "../../hooks/usePosition";
 
-function DevForm({ onSubmit }) {
+import { useGlobalState } from "../../store/GlobalState";
+import usePosition from "../../hooks/usePosition";
+import './styles.scss';
+
+function DevForm() {
+  const { createDev } = useGlobalState();
   const { latitude, longitude, onChange, clearPosition } = usePosition();
   const [github_username, setGithubUsername] = useState("");
   const [techs, setTechs] = useState("");
@@ -9,7 +13,7 @@ function DevForm({ onSubmit }) {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    await onSubmit({
+    await createDev({
       github_username,
       techs,
       latitude,
