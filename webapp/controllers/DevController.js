@@ -74,7 +74,7 @@ export const createDev = async (request, response) => {
 export const deleteDev = async (request, response) => {
   try {
     await Dev.findByIdAndDelete(request.params.id);
-    return response.status(200).json('Dev Deleted');
+    return response.status(204).send();
   } catch (error) {
     return response.status(500).json({ message: 'Server Error' });
   }
