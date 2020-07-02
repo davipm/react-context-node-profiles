@@ -35,5 +35,5 @@ if (process.env.NODE_ENV === 'production') {
 app.use([devRoute, searchRoute]);
 
 app.listen(process.env.PORT, () =>
-  console.log(`Hello World running in port ${process.env.PORT}`.yellow.bold)
+  console.log(`Find Profiles running in port ${process.env.PORT}`.yellow.bold)
 );
