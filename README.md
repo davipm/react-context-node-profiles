@@ -10,6 +10,7 @@ Node.js installed, and Expo.io
 
 * React
 * React Native
+* Context Api
 * SASS
 * Styled Components
 * Node
