@@ -1,5 +1,6 @@
 import React from "react";
-import style from "./devItem.module.scss";
+import PropTypes from "prop-types";
+import styles from "./devItem.module.scss";
 
 import { useGlobalState } from "../../store/GlobalState";
 
@@ -7,7 +8,7 @@ function DevItem({ dev }) {
   const { deleteDev } = useGlobalState();
 
   return (
-    <li className={style.devItem}>
+    <li className={styles.devItem}>
       <span
         onClick={() => deleteDev(dev._id)}
         title="Delete Dev"
@@ -15,9 +16,9 @@ function DevItem({ dev }) {
       >
         X
       </span>
-      <header className={style.devHeader}>
+      <header className={styles.devHeader}>
         <img src={dev.avatar_url} alt={dev.name} />
-        <div className={style.devUserInfo}>
+        <div className={styles.devUserInfo}>
           <strong>{dev.name}</strong>
           <span>{dev.techs.join(", ")}</span>
         </div>
@@ -33,5 +34,15 @@ function DevItem({ dev }) {
     </li>
   );
 }
+
+DevItem.propTypes = {
+  dev: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    bio: PropTypes.string,
+    techs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  }).isRequired,
+};
 
 export default DevItem;
