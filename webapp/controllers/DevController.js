@@ -14,7 +14,7 @@ export const getDevs = async (request, response) => {
     const devs = await Dev.find();
     return response.status(200).json(devs);
   } catch (error) {
-    console.log(error);
+    return response.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -59,9 +59,9 @@ export const createDev = async (request, response) => {
       sendMessage(sendSocketMessageTo, "new-dev", dev);
     }
 
-    return response.json(dev);
+    return response.status(200).json(dev);
   } catch (error) {
-    return response.status(500).json({ message: 'Server Error' });
+    return response.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -76,6 +76,6 @@ export const deleteDev = async (request, response) => {
     await Dev.findByIdAndDelete(request.params.id);
     return response.status(204).send();
   } catch (error) {
-    return response.status(500).json({ message: 'Server Error' });
+    return response.status(500).json({ message: "Server Error" });
   }
-}
+};

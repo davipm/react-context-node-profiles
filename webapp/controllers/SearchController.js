@@ -28,8 +28,8 @@ export const searchDev = async (request, response) => {
       },
     });
 
-    return response.json({ devs });
+    return response.status(200).json({ devs });
   } catch (error) {
-    console.log(error);
+    return response.status(500).json({ message: 'Server Error' });
   }
 };
