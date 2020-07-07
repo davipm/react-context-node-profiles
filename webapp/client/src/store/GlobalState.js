@@ -1,39 +1,45 @@
-import React, { createContext, useContext, useReducer, useEffect } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from "react";
+import { toast } from "react-toastify";
+import PropTypes from "prop-types";
 
 import AppReducer from "./AppReducer";
 import api from "../services/api";
+import { GET_DEVS, DELETE_DEV, CREATE_DEV, FETCH, ERROR } from "./actionTypes";
 
-const initialState = [];
-const GlobalContext = createContext([]);
+const initialState = {
+  loading: null,
+  error: null,
+  items: [],
+};
+
+const GlobalContext = createContext(initialState);
 
 function GlobalState({ children }) {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    async function loadDev() {
+    (async function loadDev() {
+      dispatch({ type: FETCH });
       try {
         const response = await api.get("/dev");
-        dispatch({
-          type: 'GET_DEVS',
-          payload: response.data
-        });
+        dispatch({ type: GET_DEVS, payload: response.data });
       } catch (error) {
-        console.log(error);
+        dispatch({ type: ERROR });
+        toast.error(`${error}`);
       }
-    }
-
-    loadDev();
+    })();
   }, []);
 
   async function createDev(data) {
     try {
       const response = await api.post("/dev", data);
       dispatch({
-        type: 'CREATE_DEV',
-        payload: response.data
+        type: CREATE_DEV,
+        payload: response.data,
       });
+      toast.success("Dev save!");
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   }
 
@@ -41,20 +47,25 @@ function GlobalState({ children }) {
     try {
       await api.delete(`/dev/${id}`);
       dispatch({
-        type: 'DELETE_DEV',
-        payload: id
+        type: DELETE_DEV,
+        payload: id,
       });
+      toast.success("Dev Deleted!");
     } catch (error) {
-      console.log(error);
+      toast.error(`${error}`);
     }
   }
 
   return (
-    <GlobalContext.Provider value={{ state, createDev, deleteDev }}>
+    <GlobalContext.Provider value={{ ...state, createDev, deleteDev }}>
       {children}
     </GlobalContext.Provider>
   );
 }
+
+GlobalState.propTypes = {
+  children: PropTypes.any.isRequired,
+};
 
 export default GlobalState;
 
