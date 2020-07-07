@@ -18,11 +18,11 @@
     right: 20px;
     width: 30px;
     height: 30px;
-    font-size: .9rem;
+    font-size: 0.9rem;
     background-color: var(--main-bg-color);
     border-radius: 9999px;
     cursor: pointer;
-    transition: all .15s ease-in-out;
+    transition: all 0.15s ease-in-out;
 
     &:hover {
       filter: brightness(90%);
@@ -38,13 +38,13 @@
 
   a {
     display: inline-block;
-    color: #8e4dff;
+    color: var(--profile-link-color);
     font-size: 14px;
     text-decoration: none;
-    transition: all .15s ease-in-out;
+    transition: all 0.15s ease-in-out;
 
     &:hover {
-      color: #5a2ea6;
+      color: var(--profile-link-hover);
     }
   }
 }
@@ -73,7 +73,7 @@
 
   span {
     font-size: 13px;
-    color: #999999;
+    color: var(--span-color);
     margin-top: 2px;
   }
 }
