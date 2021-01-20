@@ -14,7 +14,7 @@ const initialState = {
 
 const GlobalContext = createContext(initialState);
 
-function GlobalState({ children }) {
+export default  function GlobalState({ children }) {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
@@ -66,8 +66,6 @@ function GlobalState({ children }) {
 GlobalState.propTypes = {
   children: PropTypes.any.isRequired,
 };
-
-export default GlobalState;
 
 export function useGlobalState() {
   return useContext(GlobalContext);

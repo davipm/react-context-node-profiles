@@ -5,7 +5,7 @@ const initial = {
   longitude: ''
 };
 
-function usePosition() {
+export default function usePosition() {
   const [position, setPosition] = useReducer((state, newState) => ({...state, ...newState}), initial);
 
   useEffect(() => {
@@ -38,5 +38,3 @@ function usePosition() {
 
   return { ...position, onChange, clearPosition };
 }
-
-export default usePosition;

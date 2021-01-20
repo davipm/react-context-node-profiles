@@ -6,7 +6,7 @@ import { useGlobalState } from "./store/GlobalState";
 import DevForm from "./components/DevForm";
 import DevItem from "./components/DevItem";
 
-function App() {
+export default function App() {
   const { items, loading, error } = useGlobalState();
 
   return (
@@ -35,5 +35,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
